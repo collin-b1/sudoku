@@ -5,17 +5,19 @@ import { isValidPlacement, isValidSudoku } from './utils.js';
 
 export default class Solver {
 
+    counter: number;
+
     constructor () {
         this.counter = 0;
     }
 
-    solve(grid, recursions = 500) {
+    solve(grid: Grid, recursions = 500) {
         this.counter = 0;
         this._solve(grid, recursions);
     }
 
     // Recursive solve method, use solve() instead
-    _solve(grid, recursions) {
+    _solve(grid: Grid, recursions: number) {
         if (isValidSudoku(grid)) return true;
         for (let y = 0; y < grid.boxSize; y++) { // Row
             for (let x = 0; x < grid.boxSize; x++) { // Column

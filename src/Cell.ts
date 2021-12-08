@@ -1,13 +1,11 @@
-'use strict';
-
 export default class Cell {
-    constructor(value) {
+    value: number
+    
+    constructor(value: number) {
         this.value = value;
-        //this.row = row;
-        //this.col = col;
     }
 
-    setValue(value) {
+    setValue(value: number) {
         this.value = value;
     }
 

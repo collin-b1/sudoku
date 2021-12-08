@@ -2,6 +2,9 @@
 
 import Grid  from './Grid.js';
 
+/**
+ * @deprecated Use Grid instead
+ */
 export default class Sudoku {
 
     constructor(boxSize = 9, puzzle) {

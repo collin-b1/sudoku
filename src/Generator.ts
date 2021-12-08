@@ -10,14 +10,17 @@ import {
 
 class Generator {
 
-    static async generate(size = 9) {
+    grid: Grid;
+
+    static generate(size = 9): Grid {
         let grid = new Grid(size);
         this._recursiveFill(grid);
-        this._dig(grid)
+        this._dig(grid);
         return grid;
     }
 
-    static _recursiveFill(grid) {
+    static _recursiveFill(grid: Grid): boolean {
+        console.log('\n'+ grid);
         const size = grid.getRow(0).length;
         if (isValidSudoku(grid)) return true;
         for (let y = 0; y < size; y++) {
@@ -27,7 +30,7 @@ class Generator {
                     for (let num of numbers) {
                         if (isValidPlacement(grid,y,x,num)) {
                             grid.getGrid()[y][x].setValue(num);
-                            if (this._recursiveFill(grid, size)) {
+                            if (this._recursiveFill(grid)) {
                                 return true;
                             } else { 
                                 grid.getGrid()[y][x].setValue(0);
@@ -40,7 +43,7 @@ class Generator {
         }
     }
 
-    static _dig(grid, sequence = Generator.Sequence.ITERATE) {
+    static _dig(grid: Grid, sequence = 1) {
         for (let y = 0; y < grid.boxSize; y++) {
             for (let x = 0; x < grid.boxSize; x++) {
                 let backup = grid.getGrid()[y][x].getValue();
@@ -56,11 +59,5 @@ class Generator {
         }
     }
 }
-
-Generator.Sequence = {};
-Generator.Sequence.ITERATE = 1;
-Generator.Sequence.WANDER_S = 2;
-Generator.Sequence.JUMP_ONE = 3;
-Generator.Sequence.RANDOMIZE = 4;
 
 export default Generator;
