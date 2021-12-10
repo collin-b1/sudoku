@@ -1,6 +1,4 @@
-'use strict';
-
-import Generator from './Generator.js';
+import { Generator } from './generator/';
 
 let sudoku = Generator.generate();
-console.log(sudoku.getNumberMatrix());
+console.log(sudoku.toSingleLineString());
